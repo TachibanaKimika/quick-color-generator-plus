@@ -120,7 +120,7 @@ export default function ConfigComponent({
             {'Hue Expression'}
           </Tooltip>
           <div className={style["selector"]}>
-            <Select defaultValue="ease-in" style={{ width: 140 }} onChange={(e)=>console.log(e)} size="small">
+            <Select disabled defaultValue="ease-in" style={{ width: 140 }} onChange={(e)=>console.log(e)} size="small">
               <Option value="ease-in">Ease In</Option>
               <Option value="ease-out">Ease Out</Option>
               <Option value="ease-in-out">Ease In Out</Option>
