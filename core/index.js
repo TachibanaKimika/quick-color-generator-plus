@@ -43,7 +43,7 @@ class Color {
       sOffset = endColor.s - startColor.s, // 30
       lOffset = endColor.l - startColor.l // 30
     // 先根据曲线方程算出步长 *(范围100的)
-    const rangeControl = (value, min = 0, max = 100) => {
+    const rangeControl = (value, min = 0, max = 1) => {
       return ( value < min 
           ? min 
           : (value > max ? max : value)
