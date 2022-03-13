@@ -1,0 +1,48 @@
+.side-bar-wrap {
+  .section-title {
+    width: 320px;
+    text-align: left;
+    font-size: 25px;
+    font-weight: 700;
+    margin: 0 auto;
+    display: flex;
+    margin-top: 15px;
+    align-items: center;
+    .title-button {
+      font-weight: 400;
+      font-size: 12px;
+      margin-left: auto;
+      cursor: pointer;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 1px 5px;
+      &:hover {
+        box-shadow: 0px 0px 10px #ddd;
+        transition: all 0.2s ease-in-out;
+      }
+    }
+  }
+  .selector-item {
+    width: 320px;
+    margin: 0 auto;
+    margin-top: 15px;
+    &:not(:last-child) {
+      padding-bottom: 25px;
+      border-bottom: 2px solid #ddd;
+    }
+    .label {
+      text-align: left;
+      font-weight: 700;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      .selector {
+        margin-left: auto;
+      }
+    }
+    .picker {
+      width: 100%;
+      margin-top: 15px;
+    }
+  }
+}
