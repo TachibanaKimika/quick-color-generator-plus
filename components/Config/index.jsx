@@ -6,15 +6,11 @@ import { CHART_TYPES } from '@/config/index'
 import Color from '@/core/index'
 import style from './index.module.scss'
 import BezierEasing from 'bezier-easing'
-const [
-  easingIn,
-  easingOut,
-  easingInOut
-] = [
-  BezierEasing(0.5, 0, 1, 1),
-  BezierEasing(0, 0, 0.5, 1),
-  BezierEasing(0.5, 0, 0.5, 1)
-];
+const Bezier = {
+  'ease-in': BezierEasing(0.5, 0, 1, 1),
+  'ease-out':  BezierEasing(0, 0, 0.5, 1),
+  'ease-in-out': BezierEasing(0.5, 0, 0.5, 1)
+}
 
 export default function ConfigComponent({ 
   colorChange,
@@ -42,8 +38,17 @@ export default function ConfigComponent({
   })
   const [hExpression, sExpression, lExpression] = [useRef(null), useRef(null), useRef(null)]
 
-  const setExpression = (func, target) => {
-    setColorFuncs({...colorFuncs, [target]: func})
+  const setExpression = (funcName, target) => {
+    if(funcName==='custom') {
+      return
+    }
+    setConfig({
+      ...config,
+      colorFunc: {
+        ...config.colorFunc,
+        [target]: Bezier[funcName]
+      }
+    })
   }
   const tips = {
     HUE_EXPRESSION: `定制hue的曲线: 输入的值(x)从0 - 1, 输出的值(return)也为从0 - 1`
@@ -73,7 +78,8 @@ export default function ConfigComponent({
       console.log('ERROR' + e)
     }
   }, [colorFuncs])
-  // component did mounted
+
+  // 监听所有变动
   useEffect(() => {
     myColor.reload({startColor, endColor, options: config})
     const colors = myColor.initLines()
@@ -120,7 +126,7 @@ export default function ConfigComponent({
             {'Hue Expression'}
           </Tooltip>
           <div className={style["selector"]}>
-            <Select disabled defaultValue="ease-in" style={{ width: 140 }} onChange={(e)=>console.log(e)} size="small">
+            <Select defaultValue="ease-in" style={{ width: 140 }} onChange={(e)=>setExpression(e, 'h')} size="small">
               <Option value="ease-in">Ease In</Option>
               <Option value="ease-out">Ease Out</Option>
               <Option value="ease-in-out">Ease In Out</Option>
@@ -168,6 +174,15 @@ export default function ConfigComponent({
       <div className={style["selector-item"]}>
         <div className={style["label"]}>
           {'Saturation Expression'}
+          
+          <div className={style["selector"]}>
+            <Select defaultValue="ease-in" style={{ width: 140 }} onChange={(e)=>setExpression(e, 'l')} size="small">
+              <Option value="ease-in">Ease In</Option>
+              <Option value="ease-out">Ease Out</Option>
+              <Option value="ease-in-out">Ease In Out</Option>
+              <Option value="custom">Custom</Option>
+            </Select>
+          </div>
         </div>
         <div className={style["picker"]}>
           <Input.TextArea  
@@ -209,6 +224,14 @@ export default function ConfigComponent({
       <div className={style["selector-item"]}>
         <div className={style["label"]}>
           {'Lightness Expression'}
+          <div className={style["selector"]}>
+            <Select defaultValue="ease-in" style={{ width: 140 }} onChange={(e)=>setExpression(e, 's')} size="small">
+              <Option value="ease-in">Ease In</Option>
+              <Option value="ease-out">Ease Out</Option>
+              <Option value="ease-in-out">Ease In Out</Option>
+              <Option value="custom">Custom</Option>
+            </Select>
+          </div>
         </div>
         <div className={style["picker"]}>
           <Input.TextArea  
