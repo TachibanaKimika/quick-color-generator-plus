@@ -93,7 +93,7 @@ class Color {
       }
     }
     const colors = this.initLines()
-    console.log(colors)
+    // console.log(colors)
     const levels = (colors.length - 1) / 2
     let text = ``
     colors.forEach(({ color }, index) => {
@@ -106,6 +106,23 @@ class Color {
       }
     })
     return text
+  }
+
+  // input hex
+  static contrastRatioCalc = (color1Hex, color2Hex) => {
+    const color1Rgb = convert.hex.rgb(color1Hex)
+    const color2Rgb = convert.hex.rgb(color2Hex)
+    const lightNessCalc = (rgb) => {
+      const rgbData = rgb.map(v => {
+        v /= 255
+        return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4)
+      })
+      return rgbData[0] * 0.2126 + rgbData[1] * 0.7152 + rgbData[2] * 0.0722
+    }
+    const brightest = Math.max(lightNessCalc(color1Rgb), lightNessCalc(color2Rgb))
+    const darkest = Math.min(lightNessCalc(color1Rgb), lightNessCalc(color2Rgb))
+    console.log('RGB', color1Rgb, color1Hex, color2Rgb, color2Hex, (brightest + 0.05) / (darkest + 0.05))
+    return (brightest + 0.05) / (darkest + 0.05)
   }
 }
 

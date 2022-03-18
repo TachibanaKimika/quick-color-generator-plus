@@ -4,11 +4,11 @@ function MyApp({ Component, pageProps }) {
   return <Component {...pageProps} />
 }
 
-// export default MyApp
+export default MyApp
 
 // !important without SSR
-import dynamic from 'next/dynamic';
+// import dynamic from 'next/dynamic';
 
-export default dynamic(() => Promise.resolve(MyApp), {
-  ssr: false,
-});
+// export default dynamic(() => Promise.resolve(MyApp), {
+//   ssr: false,
+// });

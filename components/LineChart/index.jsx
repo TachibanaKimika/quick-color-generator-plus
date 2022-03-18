@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import shortid from 'shortid'
 import { Chart } from '@antv/g2';
+import dynamic from 'next/dynamic';
 
-export default function LineChart({ type, data }) {
+function LineChart({ type, data }) {
   const [uuid] = useState(shortid.generate())
   const [chartInstance, setChartInstance] = useState(null)
   console.log(type, data)
@@ -14,7 +15,7 @@ export default function LineChart({ type, data }) {
       container: uuid,
       autoFit: true,
       height: 700,
-      padding: [30, 30, 95, 80]
+      padding: [30, 60, 95, 80]
     });
     chart.data(formatData(data));
     chart.scale({
@@ -92,3 +93,6 @@ export default function LineChart({ type, data }) {
     </div>
   )
 }
+export default dynamic(() => Promise.resolve(LineChart), {
+  ssr: false,
+});

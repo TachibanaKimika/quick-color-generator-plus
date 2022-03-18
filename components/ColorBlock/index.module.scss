@@ -1,0 +1,16 @@
+.color-block-item {
+  cursor: pointer;
+  width: 80px;
+  height: 180px;
+  transition: 
+    background-color 0.2s ease-in-out, 
+    font-size 0.2s ease-out;
+  writing-mode: vertical-lr;
+  padding: 10px 5px;
+  font-size: 16px;
+  font-weight: 700;
+  &:hover {
+    // border: 1px solid #000;
+    font-size: 24px;
+  }
+}

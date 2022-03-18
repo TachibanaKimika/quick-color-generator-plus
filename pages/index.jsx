@@ -3,6 +3,7 @@ import Head from 'next/head'
 import Config from '@/components/Config'
 import { CHART_TYPES } from '@/config/index'
 import LineChart from '@/components/LineChart'
+import ColorBlock from '@/components/ColorBlock'
 export default function Home() {
   const [colors, setColors] = useState([])
   const [chartConfig, setChartConfig] = useState(null)
@@ -31,8 +32,9 @@ export default function Home() {
           boxSizing: 'border-box'
         }}>
           <div className="chart-view" style={{
-            width: '100%'
+            width: '100%',
           }}>
+            <ColorBlock colors={colors} />
             <LineChart 
             type={chartType}
             data={colors} />
