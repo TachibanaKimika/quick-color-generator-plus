@@ -31,8 +31,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
 
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm build
+      - run: npm install --frozen-lockfile
+      - run: npm run build
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
