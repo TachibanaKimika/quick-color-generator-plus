@@ -14,3 +14,9 @@ a {
 * {
   box-sizing: border-box;
 }
+
+*::-webkit-scrollbar { 
+  width: 6px;
+  height: 100%;
+  overflow: auto;
+}
